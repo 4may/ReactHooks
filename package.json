@@ -1,0 +1,31 @@
+{
+  "name": "ReactHooks",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/4may/ReactHooks.git",
+  "author": "4may <naoki.hanzawa.pub@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-player": "^2.0.1",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^3.4.1",
+    "styled-components": "^5.1.0"
+  },
+  "scripts": {
+    "start": "react-scripts start"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
