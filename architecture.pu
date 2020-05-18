@@ -1,0 +1,12 @@
+@startuml
+
+index -- App
+App -- MyPlayer
+MyPlayer -- Video
+MyPlayer -- Playlist
+Playlist -- NightMode
+Playlist -- PlaylistHeader
+Playlist -- PlaylistItems
+PlaylistItems -- PlaylistItem
+
+@enduml
