@@ -9,4 +9,10 @@ Playlist -- PlaylistHeader
 Playlist -- PlaylistItems
 PlaylistItems -- PlaylistItem
 
+Video : Video(active, autoplay, endCallback, progressCallback)
+Playlist : Playlist(videos, active, nightModeCallback, nightMode)
+NightMode : NightMode(nightModeCallback, nightMode)
+PlaylistHeader : PlaylistHeader(active, total)
+PlaylistItems : PlaylistItems(video, active, played)
+PlaylistItem : PlaylistItem(video, active, played)
 @enduml
