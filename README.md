@@ -16,3 +16,5 @@
 * 例：react_videoplayer/4tuFk_pdWVo
 
 アプリケーションの配下に動画用のページが一階層付け加えられる。
+
+[reactplayerのproperty](https://github.com/CookPete/react-player#props)
