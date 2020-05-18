@@ -28,14 +28,36 @@ const themeLight = {
 
 //動画プレイヤー
 //Video, Playlistの二つから構成される。
-const MyPlayer = props => (
-    //単にエラーを解消するだけなら、divよりもReact.Fragmentを使うべき。 React.Fragmentは生成するHTMLには含まれないため、本来不要なタグを増やさなくて済む。
-    <ThemeProvider theme={state.nightMode ? themeNight : themeLight}>
-        <StyledMyPlayer>
-            <Video />
-            <Playlist />
-        </StyledMyPlayer>
-    </ThemeProvider>
-)
+const MyPlayer = props => {
+
+    const nightModeCallback = () => {}
+
+    const endCallback = () => {}
+
+    const progressCallback = () => {}
+
+    return(
+        //単にエラーを解消するだけなら、divよりもReact.Fragmentを使うべき。 React.Fragmentは生成するHTMLには含まれないため、本来不要なタグを増やさなくて済む。
+        <ThemeProvider theme={state.nightMode ? themeNight : themeLight}>
+            {state.videos !== null ? (
+            <StyledMyPlayer>
+                <Video 
+                    active={state.activeVideo}
+                    autoplay={state.autoplay}
+                    endCallback={endCallback}
+                    progressCallback={progressCallback}
+                />
+                <Playlist 
+                    videos={state.videos}    
+                    active={state.activeVideo}
+                    nightModeCallback={nightModeCallback}
+                    nightMode={state.nightMode}
+                />
+            </StyledMyPlayer>
+            ) : null}
+        </ThemeProvider>
+    )
+}
+
 
 export default MyPlayer

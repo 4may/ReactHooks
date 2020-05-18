@@ -8,11 +8,11 @@ import StyledPlaylist from '../styles/StyledPlaylist'
 //プレイリストコンポーネント
 //３つの要素から構成される
 //NightMode, PlaylistHeader, PlaylistItems
-const Playlist = props => (
+const Playlist = ({ videos, active, nightModeCallback, nightMode }) => (
     <StyledPlaylist>
-        <NightMode />
-        <PlaylistHeader />
-        <PlaylistItems />
+        <NightMode nightModeCallback={nightModeCallback} nightMode={nightMode}/>
+        <PlaylistHeader active={active} total={videos.length}/>
+        <PlaylistItems video={videos} active={active}/>
     </StyledPlaylist>
 )
 
