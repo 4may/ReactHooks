@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Video from '../Video'
 import Playlist from '../containers/Playlist'
 import { ThemeProvider } from 'styled-components'
@@ -29,6 +29,22 @@ const themeLight = {
 //動画プレイヤー
 //Video, Playlistの二つから構成される。
 const MyPlayer = props => {
+
+    //nameをキーとして、動画情報をロード
+    //ここでは、index.html内のbodyで定義している値を使う.
+    const videos = JSON.parse(document.querySelector('[name="videos"]').value)
+
+    //データの構造
+    //{playlistId, wbn_rdx, playlist[{num, title, id, duration, video}, {...}, {...}, ...]}
+    const [state, setState] = useState({
+        videos: videos.playlist,
+        activeVideo: videos.playlist[0],
+        nightMode : true,
+        playlistId : videos.playlistId,
+        autoplay : false
+    })
+    const states = state.videos.map(video => video.id)
+    console.log(states)
 
     const nightModeCallback = () => {}
 

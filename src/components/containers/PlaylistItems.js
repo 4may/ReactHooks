@@ -4,14 +4,14 @@ import StyledPlaylistItems from '../styles/StyledPlaylistitems'
 //PlaylistItemの一覧
 const PlaylistItems = ({videos, active}) => (
     <StyledPlaylistItems>
-        {videos.map(video => {
+        {videos.map(video => 
             <PlaylistItem 
-                key={video.id}
-                video={video}
-                active={video.id === active.id ? true : false}
+                key={video.id} 
+                video={video} 
+                active={video.id === active.id ? true : false} 
                 played={video.played}
             />
-        })}
+        )}
     </StyledPlaylistItems>
 )
 

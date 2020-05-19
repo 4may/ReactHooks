@@ -1,5 +1,5 @@
 import React from 'react'
-import StyledNightMode from './styles/StyledNightmode'
+import StyledNightmode from './styles/StyledNightmode'
 
 //プレイリストの背景の色を切り替えるためのコンポーネント
 const NightMode = ({ nightModeCallback, nightMode }) => (
