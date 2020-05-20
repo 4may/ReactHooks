@@ -8,6 +8,7 @@ Playlist -- NightMode
 Playlist -- PlaylistHeader
 Playlist -- PlaylistItems
 PlaylistItems -- PlaylistItem
+withLink -- PlaylistItems
 
 Video : Video(active, autoplay, endCallback, progressCallback)
 Playlist : Playlist(videos, active, nightModeCallback, nightMode)
