@@ -68,11 +68,37 @@ const MyPlayer = ({ match, history, location }) => {
     const states = state.videos.map(video => video.id)
     console.log(states)
 
-    const nightModeCallback = () => {}
+    //nightModeのON/OFFを切り替えるためのコールバック関数
+    const nightModeCallback = () => {
+        //...prevStateは明示的に指定する必要がある。
+        setState(prevState => ({...prevState, nightMode: !prevState.nightMode}))
+    }
 
-    const endCallback = () => {}
+    //次に再生するビデオを取得する
+    const endCallback = () => {
+        const videoId = match.params.activeVideo
+        const currentVideoIndex = state.videos.findIndex(video => video.id === videoId)
 
-    const progressCallback = () => {}
+        //現在再生しているビデオがプレイリストの最後のビデオである場合、プレイリストの先頭ビデオのインデックスを取得する
+        //そうでない場合、現在再生しているビデオの次のビデオのインデックスを取得する
+        const nextVideoIndex = currentVideoIndex === state.videos.length - 1 ? 0 : currentVideoIndex + 1
+
+        history.push({
+            pathname: `${state.videos[nextVideoIndex].id}`,
+            autoplay: false
+        })
+    }
+
+    //11秒以上再生した動画は、プレイリスト上の名前の左に緑丸がつく
+    const progressCallback = (e) => {
+        if(e.playedSeconds > 10 && e.playedSeconds < 11){
+            const videos = [...state.videos]
+            const playedVideo = videos.find(video => video.id === state.activeVideo.id)
+            playedVideo.played = true
+
+            setState(prevState => ({...prevState, videos}))
+        }
+    }
 
     return(
         //単にエラーを解消するだけなら、divよりもReact.Fragmentを使うべき。 React.Fragmentは生成するHTMLには含まれないため、本来不要なタグを増やさなくて済む。
