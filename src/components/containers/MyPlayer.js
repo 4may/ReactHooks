@@ -33,16 +33,26 @@ const MyPlayer = ({ match, history, location }) => {
     //nameをキーとして、動画情報をロード
     //ここでは、index.html内のbodyで定義している値を使う.
     const videos = JSON.parse(document.querySelector('[name="videos"]').value)
+    const savedState = JSON.parse(localStorage.getItem(`${videos.playlistId}`))
 
     //データの構造
     //{playlistId, wbn_rdx, playlist[{num, title, id, duration, video}, {...}, {...}, ...]}
     const [state, setState] = useState({
-        videos: videos.playlist,
-        activeVideo: videos.playlist[0],
-        nightMode : true,
-        playlistId : videos.playlistId,
-        autoplay : false
+        //localStorageにデータが存在する場合は、そのデータを使う。
+        videos: savedState ? savedState.videos : videos.playlist,
+        activeVideo: savedState ? savedState.activeVideo : videos.playlist[0],
+        nightMode : savedState ? savedState.nightMode : true,
+        playlistId : savedState ? savedState.playlistId : videos.playlistId,
+        autoplay : savedState ? savedState.autoplay : false
     })
+
+    useEffect(() => {
+        //localStorageにデータを格納する. keyとしてplaylistIdを使い、valueとして文字列型に変えたstateを使う。
+        //localStorageはデータの保存先webstorageの一種。
+        //そのほかに、sessionStorageとよばれるDBもある。
+        //https://www.granfairs.com/blog/staff/local-storage-01
+        localStorage.setItem(`${state.playlistId}`, JSON.stringify({...state}))
+    }, [state])
 
     useEffect(() => {
         //videoIdはejJlnMPCmNoのようなビデオ固有の識別子
