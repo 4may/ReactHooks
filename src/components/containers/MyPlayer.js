@@ -28,8 +28,8 @@ const themeLight = {
 
 //動画プレイヤー
 //Video, Playlistの二つから構成される。
-const MyPlayer = props => {
-
+//propsを分解して受け取ることができる。
+const MyPlayer = ({ match, history, location }) => {
     //nameをキーとして、動画情報をロード
     //ここでは、index.html内のbodyで定義している値を使う.
     const videos = JSON.parse(document.querySelector('[name="videos"]').value)
@@ -43,6 +43,28 @@ const MyPlayer = props => {
         playlistId : videos.playlistId,
         autoplay : false
     })
+
+    useEffect(() => {
+        //videoIdはejJlnMPCmNoのようなビデオ固有の識別子
+        const videoId = match.params.activeVideo
+        if(videoId !== undefined){
+            //videoIdと合致するidを持つビデオのインデックスを取得
+            const videoIndex = state.videos.findIndex(video => video.id === videoId)
+            setState(prev => ({
+                ...prev,
+                activeVideo: prev.videos[videoIndex],
+                autoplay: location.autoplay,
+            }))
+        } else{
+            history.push({
+                pathname: `/${state.activeVideo.id}`,
+                autoplay: false
+            })
+        }
+    //useEffect内で参照している変数を全て列挙するのきつい・・・
+    //https://medium.com/better-programming/understanding-the-useeffect-dependency-array-2913da504c44
+    }, [history, location.autoplay, match.params.activeVideo, state.activeVideo.id, state.videos])
+
     const states = state.videos.map(video => video.id)
     console.log(states)
 
