@@ -9,12 +9,13 @@ const buttonStyle = {
     margin : "40px"
 }
 
-const Button = ({ callback }) => (
+//React.memoは、property(callback)が変化したときだけcomponentを再レンダリングする
+const Button = React.memo(({ callback }) => (
     //JSXをreturnする
     <button style={buttonStyle} onClick={callback}>
         {console.log("button re-rendered!")}
         Press me!
     </button>
-)
+))
 
 export default Button

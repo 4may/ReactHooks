@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 
 import Button from './Button'
 
@@ -17,12 +17,14 @@ const App = () => {
         fontSize : "40px"
     }
 
-    //これだと、呼び出されるたびに関数が生成されてしまうため、非効率
-    const btnCallback = e => {
+    //useCallbackでラップされていない場合、呼び出されるたびに関数が生成されてしまうため、無駄なレンダリングが発生することになる。
+    //useCallback()でラップすることで、一度定義された関数を使い回すことができる。
+    //ただし、関数内部で状態を保存している場合は、使い回すべきではないため、useCallbackは使えない。
+    const btnCallback = useCallback(e => {
         console.log("click")
         const random = genRandom()
         setAppText(random)
-    }
+    }, [])
 
     return(
         <div style={appStyles}>
